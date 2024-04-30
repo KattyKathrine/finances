@@ -1,0 +1,98 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Финансы
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h1>Баланс</h1>
+
+    <form action="" method="get">
+
+       {{ filterset.form.as_p }}
+
+       <input type="submit" value="Отфильтровать" />
+    </form>
+
+    <table>
+        <tr>
+            <th class = "date">Дата</th>
+            <th>Покупка</th>
+            <th>Сумма</th>
+            <th class = "category">Категория</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for record in records %}
+
+           {% if record.is_income %}
+           <tr class = "income">
+           {% else %}
+           <tr class = "spending">
+           {% endif %}
+
+               <td class = "date">{{ record.date }}</td>
+               <td class = "spending">{{ record.text }}</td>
+               <td class = "sum">{{ record.sum|floatformat:"-2" }} ₽</td>
+               <td class = "category">
+               {% if not record.is_income %}
+               {% for category in record.category.all %}
+               {{ category }}<br>
+               {% endfor %}
+               {% endif %}
+                </td>
+                <td class = "sum"><form action="/{{ record.id }}/record_delete/" method="post">
+                    {% csrf_token %}
+
+                    <input type="submit" value="Удалить запись">
+                </form></td>
+                <td><button> <a href="/{{ record.id }}/record_update/">Редактировать</a> </button></td>
+           </tr>
+
+            {% if record.includes_items %}
+
+
+            {% for item in items|find_items:record.id %}
+            <tr class = "items">
+                <td class = "date"></td>
+               <td class = "spending">{{ item.name }}</td>
+               <td class = "sum">{{ item.cost|floatformat:"-2" }} ₽</td>
+               <td class = "category">
+
+               {% for itemcategory in item.category.all %}
+               {{ itemcategory }}<br>
+               {% endfor %}
+
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+
+            {% endif %}
+
+        {% endfor %}
+        {% if result < 0 %}
+        <tr class = "spending">
+        {% else %}
+        <tr class = "income">
+        {% endif %}
+
+               <td class = "date"></td>
+               <td class = "spending">Итого</td>
+               <td class = "sum">
+                    {{ result|floatformat:"-2" }} ₽
+               </td>
+               <td class = "category"></td>
+           </tr>
+
+
+    </table>
+
+
+
+{% endblock content %}

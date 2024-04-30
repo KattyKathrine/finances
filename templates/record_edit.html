@@ -1,0 +1,117 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Редактировать запись
+{% endblock title %}
+
+{% block content %}
+<div style="float: left">{{next}}</div>
+<div style="text-align: right">text</div>
+<hr>
+<h1>Редактировать запись</h1>
+<hr>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+
+{% if object.includes_items %}
+
+<form action="/item_create/?record={{ object.id }}" method="post">
+    {% csrf_token %}
+    <label for="item_create">Добавить позицию: </label>
+    <input id="item_create" required type="text" name="name" value="Название">
+    <input id="item_create" required type="number" name="cost" step="any" value="Стоимость">
+    <input id="item_create" required type="number" name="amount" value="Количество">
+    <select name="category" required id="id_category" multiple="">
+        <option value="">---------</option>
+        <option value="1">Еда</option>
+        <option value="2">Полезная еда</option>
+        <option value="3">Junkfood</option>
+        <option value="4">Готовая еда</option>
+        <option value="5">Доставка еды</option>
+        <option value="6">Техника</option>
+        <option value="7">Косметика уходовая</option>
+        <option value="8">Косметика декоративная</option>
+        <option value="9">Бытовая химия</option>
+        <option value="10">Товары для дома</option>
+        <option value="11">Подарки</option>
+        <option value="12">Одежда</option>
+        <option value="14">Бабушка</option>
+        <option value="15">Кошка</option>
+        <option value="16">Доставка</option>
+        <option value="17">Платежи</option>
+        <option value="18">Развлечения</option>
+        <option value="19">Спонтанные траты</option>
+        <option value="20">Здоровье</option>
+        <option value="20">Средства гигиены</option>
+
+
+    </select>
+    <input type="submit" value="Добавить">
+</form>
+
+
+
+<br>
+
+<table>
+        <tr>
+
+            <th>Покупка </th>
+            <th>Стоимость</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+            <th class = "category">Категория</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class = "items">
+
+           <td class = "spending">Итого</td>
+           <td class = "sum"></td>
+           <td class = "sum"></td>
+           <td class = "sum">{{items|itemsresult|floatformat:"-2"}} ₽</td>
+           <td class = "category"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for item in items %}
+        <tr class = "items">
+
+           <td class = "spending">{{ item.name }}</td>
+           <td class = "sum">{{ item.cost|floatformat:"-2" }} ₽</td>
+           <td class = "sum">{{ item.amount|floatformat }}</td>
+           <td class = "sum">{{ item.cost|multi:item.amount|floatformat:"-2" }} ₽</td>
+           <td class = "category">
+
+           {% for itemcategory in item.category.all %}
+           {{ itemcategory }}<br>
+           {% endfor %}
+
+            </td>
+            <td>
+
+                <form action="/{{ item.id }}/item_delete/" method="post">
+                    {% csrf_token %}
+
+                    <input type="submit" value="Удалить позицию">
+                </form>
+
+            </td>
+            <td><button> <a href="/{{ item.id }}/item_update/">Редактировать</a> </button></td>
+        </tr>
+        {% endfor %}
+
+</table>
+
+{% endif %}
+
+
+{% endblock content %}

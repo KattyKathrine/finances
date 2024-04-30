@@ -1,0 +1,182 @@
+/* 
+
+Вся гамма:
+   F6F8F2
+   E7EFDA
+   A4BA82
+   819D58
+   основа: CADAB2
+   
+   https://paletton.com/#uid=12r0u0k5TtH0NQr2UCb9Cpke2lk
+   
+ 
+*/
+
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #FDFDF2;
+    margin: auto;
+}
+p {
+    text-indent: 30px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-align: justify
+    }
+div {
+    margin: 0 auto 10px auto;
+    background-color: #FAFADB;
+    padding: 5px;
+    #border-radius: 5px;
+
+}
+
+div.main {
+    margin: 0 auto;
+    background-color: inherit;
+    min-width: 800px;
+    max-width: 1500px;
+    padding: 0px;
+    border: none;
+    #width: 75%;
+
+}
+
+
+a:hover {
+    color: #48420A
+}
+
+#header {
+    margin: 0 auto 40px auto;
+    background-color: #DDD604;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    color: #450774;
+}
+#header a {
+    color: #450774;
+} 
+
+#center {
+#    box-shadow: 0 0 3px 3px #DDD604;
+    width: 75%;
+    padding: 1%;
+    float: left;
+    min-width: 900px;
+}
+
+#sidebar {
+
+    float: right;
+    width: 20%;
+#    box-shadow: 0 0 3px 3px #DDD604;
+    padding-bottom: 10px;
+
+}   
+
+#sidebar > p {
+
+    margin-top: 5px;
+
+}   
+
+
+@font-face {
+    font-family: Z003; /* Гарнитура шрифта */
+    src: url(files/Z003-MediumItalic.otf); /* Путь к файлу со шрифтом */
+   }
+   
+hr {
+    border: none; /* Убираем границу */
+    background-color: #819D58; /* Цвет линии */
+    height: 2px; /* Толщина линии */
+   }
+
+   
+table {
+    border: 1px solid #450774;
+    border-spacing: 0 0;
+    border-collapse: collapse;
+}
+
+tr {
+    
+    
+    
+}
+
+th {
+    background: #DDD604;
+    color: #450774;
+    border: 1px solid #450774;
+}
+
+th.date {
+    
+    min-width: 200px;
+}
+
+th.category {
+    
+    min-width: 150px;
+    
+    
+}
+
+td {
+    padding: 5px;
+    border-top: 1px solid #450774;
+    border: 1px solid #450774;
+}
+
+td.date {
+
+    min-width: 150px;
+}
+
+td.spending {
+    
+    width: 250px;
+        
+    
+}
+
+tr.spending td.sum {
+    
+    min-width: 100px;
+    color: #DB040A;
+    text-align: right;
+}
+
+td.category {
+    
+    
+    
+    padding-left: 40px;;
+}
+
+tr.income td.sum {
+    
+    min-width: 100px;
+    color: #078C00;
+    text-align: right;
+}
+
+tr.items td {
+
+    background-color: #EAEACD;
+    padding-left: 40px;
+}
+
+tr.items td.sum {
+
+    color: #AB0004;
+    text-align: right;
+}
+
+
+
+   
